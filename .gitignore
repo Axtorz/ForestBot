@@ -22,3 +22,5 @@ rad.json
 TestResults.xml
 #Token
 config.js
+#Dépendances
+node_modules

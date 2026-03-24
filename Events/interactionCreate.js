@@ -1,8 +1,8 @@
-const Discord = require("discord.js")
+import { InteractionType } from "discord.js"
 
-module.exports = async (bot, interaction) => {
+export default async function(bot, interaction){
 
-    if(interaction.type === Discord.InteractionType.ApplicationCommandAutocomplete) {
+    if(interaction.type === InteractionType.ApplicationCommandAutocomplete) {
 
         let entry = interaction.options.getFocused()
 
@@ -20,12 +20,10 @@ module.exports = async (bot, interaction) => {
         }
     }
 
-    if(interaction.type === Discord.InteractionType.ApplicationCommand) {
+    if(interaction.type === InteractionType.ApplicationCommand) {
 
-        let command = require(`../Commandes/${interaction.commandName}`)
+        let command = (await import(`../Commandes/${interaction.commandName}.js`)).default;
         command.run(bot, interaction, interaction.options, bot.db)
-
-    
     }
-    
+
 }

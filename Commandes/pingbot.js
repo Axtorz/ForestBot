@@ -1,7 +1,6 @@
-const Discord = require("discord.js")
+import { EmbedBuilder } from "discord.js";
 
-module.exports = {
-
+export default {
     name: "pingbot",
     description: "Afficher la latence du bot",
     permission: "Aucune",
@@ -9,11 +8,11 @@ module.exports = {
 
     async run(bot, message, args) {
 
-        let Embed = new Discord.EmbedBuilder()
+        const Embed = new EmbedBuilder()
             .setColor(bot.color)
             .setTitle("**Pong !** 🏓")
-            .setDescription(`Ping bot : \`${bot.ws.ping}\` ms\n`)
+            .setDescription(`Ping bot : \`${bot.ws.ping}\` ms\n`);
 
-        await message.reply({embeds: [Embed]})
+        await message.reply({ embeds: [Embed] });
     }
-}
+};

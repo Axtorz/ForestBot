@@ -1,19 +1,22 @@
-const Discord = require("discord.js")
-const intents = new Discord.IntentsBitField([
-    Discord.GatewayIntentBits.Guilds,
-    Discord.GatewayIntentBits.GuildMessages,
-    Discord.GatewayIntentBits.GuildMessageReactions
-]);
+import { Client, GatewayIntentBits, Collection } from 'discord.js';
+import dotenv from 'dotenv';
+import loadCommands from './Loaders/loadCommands.js';
+import loadEvents from './Loaders/loadEvents.js';
 
-const bot = new Discord.Client({ intents });
-const loadCommands = require("./Loaders/loadCommands")
-const loadEvents = require("./Loaders/loadEvents")
-const config = require("./config")
-const client = require("./main.js")
+const bot = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions
+  ]
+});
 
-bot.commands = new Discord.Collection()
+bot.commands = new Collection();
 bot.color = "#00a30e";
 
-bot.login(config.token)
-loadCommands(bot)
-loadEvents(bot)
+dotenv.config();
+
+await bot.login(process.env.TOKEN);
+
+loadCommands(bot);
+loadEvents(bot);

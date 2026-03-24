@@ -1,14 +1,11 @@
-const Discord = require("discord.js")
-const { REST } = require("@discordjs/rest")
-const { Routes } = require("discord.js")
+import { SlashCommandBuilder, REST, Routes } from "discord.js";
 
-module.exports = async bot => {
-
+export default async function(bot){
     let commands = [];
 
     bot.commands.forEach(async command => {
 
-        let slashcommand = new Discord.SlashCommandBuilder()
+        let slashcommand = new SlashCommandBuilder()
         .setName(command.name)
         .setDescription(command.description)
         .setDMPermission(command.dm)
